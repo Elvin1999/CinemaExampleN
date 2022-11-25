@@ -10,11 +10,11 @@
 
 
         <Canvas.Background>
-            <ImageBrush Stretch="Fill" ImageSource="{Binding BackImagePath}" >
+            <ImageBrush Stretch="Fill" ImageSource="{Binding Model.BackImagePath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" >
                 
             </ImageBrush>
         </Canvas.Background>
-
+       
 
         <Grid Background="Transparent"  Height="900" Width="1400"  >
         <Grid.RowDefinitions>
@@ -35,8 +35,8 @@
         <ScrollViewer Grid.Row="1">
             
         <WrapPanel Name="myPanel" Grid.Row="1">
-            
-        </WrapPanel>
+             
+                </WrapPanel>
         </ScrollViewer>
         
     </Grid>

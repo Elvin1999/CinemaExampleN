@@ -1,4 +1,5 @@
-﻿using CinemaExampleN.ViewModels;
+﻿using CinemaExampleN.Models;
+using CinemaExampleN.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +22,22 @@ namespace CinemaExampleN.Views
     /// </summary>
     public partial class MovieCellUC : UserControl
     {
+        
+
         public MovieCellUC(MovieCellViewModel vm)
         {
             InitializeComponent();
             vm.StarsPanel=starsPanel;
             this.DataContext = vm;
+           
+        }
+
+       
+
+        private void UserControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            
+            
         }
     }
 }

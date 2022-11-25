@@ -1,4 +1,5 @@
 ﻿using CinemaExampleN.Commands;
+using CinemaExampleN.Models;
 using CinemaExampleN.Services;
 using CinemaExampleN.Views;
 using CinemaExampleN.Views.UserControls;
@@ -21,19 +22,21 @@ namespace CinemaExampleN.ViewModels
 			set { searchText = value; OnPropertyChanged(); }
 		}
 
-		private string backImagePath;
+		private CustomImageModel model;
 
-		public string BackImagePath
+		public CustomImageModel Model
         {
-			get { return backImagePath; }
-			set { backImagePath = value; OnPropertyChanged(); }
+			get { return model; }
+			set { model = value; OnPropertyChanged(); }
 		}
+
 
 
 		public RelayCommand SearchCommand { get; set; }
 		public MainViewModel()
 		{
-			BackImagePath = @"\images\cine.jpg";
+			Model=new CustomImageModel();
+            Model.BackImagePath = @"\images\cine.jpg";
 			SearchCommand = new RelayCommand((p) =>
 			{
 				var panel = p as WrapPanel;
@@ -41,15 +44,18 @@ namespace CinemaExampleN.ViewModels
 				var movies = MovieService.GetMovies(SearchText);
 				int x = 10;
 				int y = 10;
-
-				BackImagePath = movies.First().ImagePath;
+				Model = new CustomImageModel
+				{
+					BackImagePath = movies.First().ImagePath
+				};
 
 				foreach (var m in movies)
 				{
 					var ucVM = new MovieCellViewModel
 					{
-						Movie = m
-					};
+						Movie = m,
+                        Model = this.Model
+                    };
 
 					var d = double.Parse(m.Rating.Replace('.', ',')).ToString();
 
